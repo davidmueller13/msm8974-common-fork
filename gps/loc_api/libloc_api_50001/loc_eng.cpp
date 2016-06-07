@@ -2740,6 +2740,7 @@ void loc_eng_configuration_update (loc_eng_data_s_type &loc_eng_data,
         gps_conf_tmp.A_GLONASS_POS_PROTOCOL_SELECT = gps_conf.A_GLONASS_POS_PROTOCOL_SELECT;
         gps_conf_tmp.SUPL_ES = gps_conf.SUPL_ES;
         gps_conf_tmp.SUPL_MODE = gps_conf.SUPL_MODE;
+        gps_conf_tmp.SUPL_ES = gps_conf.SUPL_ES;
         gps_conf_tmp.GPS_LOCK = gps_conf.GPS_LOCK;
         gps_conf = gps_conf_tmp;
     }
