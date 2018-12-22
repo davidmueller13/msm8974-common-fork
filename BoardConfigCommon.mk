@@ -92,8 +92,12 @@ TARGET_HAS_LEGACY_POWER_STATS := true
 TARGET_HAS_NO_WLAN_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
 
+
 # Recovery
 TARGET_RECOVERY_DEVICE_DIRS += device/samsung/msm8974-common
+
+# Properties
+TARGET_SYSTEM_PROP += device/samsung/msm8974-common/system.prop
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
