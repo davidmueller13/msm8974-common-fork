@@ -87,3 +87,10 @@
 
 # sysfs - usb
 /sys/devices/virtual/host_notify/usb_otg(/.*)?               u:object_r:sysfs_usb_otg:s0
+
+
+# firmware files
+/bt_firmware(/.*)?					u:object_r:firmware_file:s0
+/firmware(/.*)?						u:object_r:firmware_file:s0
+/firmware-modem(/.*)?					u:object_r:firmware_file:s0
+/tombstones(/.*)?					u:object_r:firmware_file:s0

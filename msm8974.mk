@@ -66,6 +66,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
+    android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
     audio_policy.msm8974 \
     audio.a2dp.default \
@@ -81,6 +82,7 @@ PRODUCT_PACKAGES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service \
     libbt-vendor
 
 # Boot animation
@@ -93,6 +95,7 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
     copybit.msm8974 \
     gralloc.msm8974 \
     hwcomposer.msm8974 \
@@ -117,6 +120,7 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
+    android.hardware.gnss@1.0-service \
     gps.msm8974
 
 PRODUCT_COPY_FILES += \
@@ -132,7 +136,6 @@ PRODUCT_PACKAGES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
 
@@ -157,7 +160,7 @@ PRODUCT_PACKAGES += \
 
 # Power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service-qti
+    android.hardware.power@1.2-service-qti
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -178,7 +181,6 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
     hostapd \
     wificond \
     wpa_supplicant \

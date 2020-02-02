@@ -1,7 +1,7 @@
 <manifest version="1.0" type="device">
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
             <name>IDevicesFactory</name>
@@ -10,7 +10,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
             <name>IEffectsFactory</name>
@@ -19,7 +19,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>IBluetoothHci</name>
@@ -33,15 +33,6 @@
         <interface>
             <name>ICameraProvider</name>
             <instance>legacy/0</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.cas</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IMediaCasService</name>
-            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -70,7 +61,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.gnss</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>IGnss</name>
@@ -146,7 +137,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.memtrack</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>IMemtrack</name>
@@ -156,7 +147,7 @@
     <hal format="hidl">
         <name>android.hardware.power</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.2</version>
         <interface>
             <name>IPower</name>
             <instance>default</instance>
@@ -201,7 +192,7 @@
     <hal format="hidl">
         <name>android.hardware.wifi.hostapd</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1.1</version>
         <interface>
             <name>IHostapd</name>
             <instance>default</instance>
@@ -210,7 +201,7 @@
     <hal format="hidl">
         <name>android.hardware.wifi.supplicant</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.2</version>
         <interface>
             <name>ISupplicant</name>
             <instance>default</instance>
