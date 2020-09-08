@@ -203,7 +203,7 @@ void LocApiBase::removeAdapter(LocAdapterBase* adapter)
 
 void LocApiBase::updateEvtMask()
 {
-     mMsgTask->sendMsg(new LocOpenMsg(this));
+    mMsgTask->sendMsg(new LocOpenMsg(this));
 }
 
 void LocApiBase::handleEngineUpEvent()

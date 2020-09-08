@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2020 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := libshim_cutils_atomic
+LOCAL_SRC_FILES := libbinder_interface.cpp
+LOCAL_MODULE := libshim_binder
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_TAGS := optional
-LOCAL_PROPRIETARY_MODULE := true
-
-LOCAL_SRC_FILES := \
-    atomic.c
+LOCAL_VENDOR_MODULE := true
+LOCAL_SHARED_LIBRARIES := libbinder libutils
 
 include $(BUILD_SHARED_LIBRARY)

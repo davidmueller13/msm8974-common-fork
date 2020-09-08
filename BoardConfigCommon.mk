@@ -80,24 +80,17 @@ DEVICE_MATRIX_FILE := device/samsung/msm8974-common/compatibility_matrix.xml
 # SELinux
 include device/samsung/msm8974-common/sepolicy/sepolicy.mk
 
-# Init
-TARGET_INIT_VENDOR_LIB := libinit_msm8974
-TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8974
-
 # Netd
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
 
 # Power
-TARGET_HAS_LEGACY_POWER_STATS := true
-TARGET_HAS_NO_WLAN_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
-
-
-# Recovery
-TARGET_RECOVERY_DEVICE_DIRS += device/samsung/msm8974-common
 
 # Properties
 TARGET_SYSTEM_PROP += device/samsung/msm8974-common/system.prop
+
+# Recovery
+TARGET_RECOVERY_DEVICE_DIRS += device/samsung/msm8974-common
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true

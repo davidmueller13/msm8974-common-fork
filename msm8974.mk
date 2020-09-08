@@ -1,5 +1,5 @@
 # Copyright (C) 2012 The CyanogenMod Project
-# Copyright (C) 2017-2019 The LineageOS Project
+# Copyright (C) 2017-2020 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,7 +48,6 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
     audio_policy.msm8974 \
     audio.a2dp.default \
@@ -91,14 +90,10 @@ PRODUCT_PACKAGES += \
     libxml2 \
     Snap
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service \
-    android.hardware.drm@1.2-service.clearkey
+    android.hardware.drm@1.0-service
 
 # fastbootd
 PRODUCT_PACKAGES += \
@@ -106,8 +101,8 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl.lt03lte \
-    android.hardware.gnss@1.0-service.lt03lte \
+    android.hardware.gnss@1.0-impl.legacy \
+    android.hardware.gnss@1.0-service.legacy \
     gps.msm8974
 
 PRODUCT_COPY_FILES += \
@@ -118,12 +113,25 @@ PRODUCT_COPY_FILES += \
 
 # IR Blaster
 PRODUCT_PACKAGES += \
-	android.hardware.ir@1.0-service.samsung
+    android.hardware.ir@1.0-service.samsung
+
+# Keylayouts
+PRODUCT_COPY_FILES += \
+    device/samsung/msm8974-common/keylayout/Vendor_04e8_Product_7021.kl:system/usr/keylayout/Vendor_04e8_Product_7021.kl
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl
-    
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
+
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service.samsung
+
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@2.0-service.samsung-qcom
+
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
@@ -153,8 +161,21 @@ PRODUCT_PACKAGES += \
 
 # Seccomp
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/seccomp/mediaextractor.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+    $(LOCAL_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl.samsung8974 \
+    android.hardware.sensors@1.0-service.samsung8974
+
+# TimeKeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep
+
+# Touch features
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.samsung
 
 # Trust HAL
 PRODUCT_PACKAGES += \
@@ -166,6 +187,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service.legacy \
     hostapd \
     wificond \
     wpa_supplicant \

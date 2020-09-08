@@ -1,6 +1,6 @@
 /*
    Copyright (c) 2016, The CyanogenMod Project. All rights reserved.
-   Copyright (c) 2017-2018, The LineageOS Project. All rights reserved.
+   Copyright (c) 2017-2020, The LineageOS Project. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -28,49 +28,82 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-#include <android-base/logging.h>
+#include <android-base/strings.h>
 
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
-#include "vendor_init.h"
 #include "property_service.h"
 
 #include "init_msm8974.h"
 
 using android::init::property_set;
 
-__attribute__ ((weak))
-void init_target_properties()
+// copied from build/tools/releasetools/ota_from_target_files.py
+// but with "." at the end and empty entry
+std::vector<std::string> ro_product_props_default_source_order = {
+    "",
+    "product.",
+    "product_services.",
+    "odm.",
+    "vendor.",
+    "system.",
+};
+
+void set_rild_libpath(char const variant[])
 {
+    std::string libpath("/system/vendor/lib/libsec-ril.");
+    libpath += variant;
+    libpath += ".so";
+
+    property_override("rild.libpath", libpath.c_str());
 }
 
-void property_override(char const prop[], char const value[])
+void cdma_properties(char const operator_alpha[],
+        char const operator_numeric[],
+        char const default_cdma_sub[],
+        char const default_network[],
+        char const rild_lib_variant[])
 {
-    prop_info *pi;
+    // Dynamic CDMA Properties
+    property_set("ro.cdma.home.operator.alpha", operator_alpha);
+    property_set("ro.cdma.home.operator.numeric", operator_numeric);
+    property_set("ro.telephony.default_cdma_sub", default_cdma_sub);
+    property_set("ro.telephony.default_network", default_network);
+    set_rild_libpath(rild_lib_variant);
 
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
+    // Static CDMA Properties
+    property_set("ril.subscription.types", "NV,RUIM");
+    property_set("telephony.lteOnCdmaDevice", "1");
+}
+
+void gsm_properties(const char default_network[],
+        char const rild_lib_variant[])
+{
+    set_rild_libpath(rild_lib_variant);
+
+    // Dynamic GSM Properties
+    property_set("ro.telephony.default_network", default_network);
+
+    // Static GSM Properties
+    property_set("telephony.lteOnGsmDevice", "1");
+}
+
+void property_override(char const prop[], char const value[], bool add)
+{
+    auto pi = (prop_info *) __system_property_find(prop);
+
+    if (pi != nullptr) {
         __system_property_update(pi, value, strlen(value));
-    else
+    } else if (add) {
         __system_property_add(prop, strlen(prop), value, strlen(value));
+    }
 }
 
-void property_override_dual(char const system_prop[],
-        char const vendor_prop[], char const value[])
+void set_ro_product_prop(char const prop[], char const value[])
 {
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
-}
-
-void vendor_load_properties()
-{
-    init_target_properties();
+    for (const auto &source : ro_product_props_default_source_order) {
+        auto prop_name = "ro.product." + source + prop;
+        property_override(prop_name.c_str(), value, false);
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-/*
- * Generate non-inlined versions of android_atomic functions.
- * Nobody should be using these, but some binary blobs currently (late 2014)
- * are.
- * If you read this in 2015 or later, please try to delete this file.
- */
 
-#define ANDROID_ATOMIC_INLINE
+#include <binder/IInterface.h>
 
-#include <cutils/atomic.h>
+extern "C" {
+
+void _ZN7android10IInterface8asBinderEv(void *retval, void* self) {
+    android::sp<android::IBinder> *ret = new(retval) android::sp<android::IBinder>;
+    *ret = android::IInterface::asBinder((android::IInterface*)self);
+}
+
+void _ZNK7android10IInterface8asBinderEv(void *retval, void *self) {
+    android::sp<android::IBinder> *ret = new(retval) android::sp<android::IBinder>;
+    *ret = android::IInterface::asBinder((android::IInterface*)self);
+}
+
+} // extern "C"
