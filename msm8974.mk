@@ -108,8 +108,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl.lt03lte \
     android.hardware.gnss@1.0-service.lt03lte \
-    android.hardware.gnss@1.0-impl.legacy \
-    android.hardware.gnss@1.0-service.legacy \
     gps.msm8974
 
 PRODUCT_COPY_FILES += \
